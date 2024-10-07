@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Home Page</title>
+{% endblock %}
+{% block content %}
+    <h1>This is a Django Server</h1>
+    {% comment %} {{peoples}} {% endcomment %}
+    <table>
+  <tr>
+    <th>S.No</th>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Can Vote</th>
+  </tr>
+  {% for people in peoples%}
+  <tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{people.name}}</td>
+    <td>{{people.age}}</td>
+    {% if people.age >= 18 %}
+    <td>Yes</td>
+    {% else %}
+    <td>No</td>
+    {% endif %}
+  </tr>
+   {% endfor %}
+  
+</table>
+{% endblock %}
