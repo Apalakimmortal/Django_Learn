@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Add Receipe</h2>
+
+<div class = "container">
+    <form method = "post" enctype = "multipart/form-data">
+        {% csrf_token %}
+  <div class="form-group">
+    <label for="exampleInputEmail1">Receipe Name</label>
+    <input name="receipe_name" type="text" class="form-control" required>
+  </div>
+  <br>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Receipe Description</label>
+    <textarea class="form-control" name = "receipe_desc" required ></textarea>
+  </div>
+  <br>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Image</label>
+    <input name="receipe_img" type="file" class="form-control">
+  </div>
+  <br>
+  <button type="submit" class="btn btn-primary">Add Receipie</button>
+</form>
+{% comment %} {{receipes}} {% endcomment %}
+<br>
+
+<div class ="mt-5">
+  <form>
+  <div class = "mx-auto-col-6">
+    <label for="exampleInputEmail1">Search Receipe</label>
+    <input name="search" type="text" class="form-control">
+    
+  </div>
+  <br>
+
+  <button type ="submit" class="btn btn-primary">Search</button>
+</form>
+</div>
+<br>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">S.No.</th>
+      <th scope="col">Receipie Name</th>
+      <th scope="col">Receipe Description</th>
+      <th scope="col">Receipe Image</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for receipe in receipes %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{receipe.receipe_name}}</td>
+      <td>{{receipe.receipe_desc}}</td>
+      <td>
+        <img src="/media/{{receipe.receipe_img}}" style = "height : 100px"></td>
+        <td>
+            <a href = "/delete_receipe/{{receipe.id}}/" class = "btn=btn-danger">DELETE</a>
+            <br>
+            <br>
+            <a href="/update_receipe/{{receipe.id}}" class = "btn=btn-success">UPDATE</a>
+        </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}
